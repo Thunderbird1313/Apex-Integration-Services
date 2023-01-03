@@ -1,0 +1,24 @@
+@isTest
+Private class AccountManagerTest {
+    @isTest
+    static void testAccountManager() {
+        Id recordId = getAccountTestRecord();
+        // Set up a test request
+        RestRequest request = new RestRequest();
+        request.requestUri = 'https://ap8.salesforce.com/services/apexrest/Accounts/'+ recordId +'/contacts';
+        request.httpMethod = 'GET';
+        RestContext.request = request;
+        //Call the test method
+        Account testacc = AccountManager.getAccount();
+        // Verify record was tested
+        System.Assert(testacc !=null);         
+      }
+    //@isTest
+    private static Id getAccountTestRecord(){
+    	Account newacc = new Account(Name='TestAcc');
+        insert newacc;
+        Contact newcon = new Contact(LastName='Testname',accountId=newacc.Id);
+        insert newcon;
+        return newacc.Id;
+    }    
+}
