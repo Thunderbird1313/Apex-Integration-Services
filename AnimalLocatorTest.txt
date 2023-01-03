@@ -1,0 +1,10 @@
+@isTest
+public class AnimalLocatorTest{
+    @isTest
+    public static void testAnimalLocator(){
+       // Set mock callout class 
+       Test.setMock(HttpCalloutMock.class, new AnimalLocatorMock());
+       String st = AnimalLocator.getAnimalNameById(1);
+       System.debug('Animal Locator String' +st);
+    }
+}

@@ -1,0 +1,26 @@
+public class AnimalLocator {
+    public class Animal_act{
+        Public Integer Id;
+        Public String Name;
+        Public String eats;
+        Public String says;        
+    }
+    public class JSONdeserial{
+        public Animal_act animal;
+    }
+    //The method must accept an Integer and return a String.
+    public static String getAnimalNameById(Integer id){
+        //The method must call https://th-apex-http-callout.herokuapp.com/animals/<id>
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint('https://th-apex-http-callout.herokuapp.com/animals/' + id);
+        request.setMethod('GET');
+        //request.setHeader('Content-Type', 'application/json;charset=UTF-8');
+        HttpResponse response = http.send(request);
+        System.debug(response.getBody());
+        //Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+        JSONdeserial result = (JSONdeserial) JSON.deserialize(response.getBody(), JSONdeserial.class);
+        system.debug('result '+ result.animal.Name);
+        return(result.animal.Name);
+    }    
+}
