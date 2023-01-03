@@ -1,0 +1,9 @@
+public class ParkLocator {
+	//Class must have a country method that uses the ParkService class 
+    public static String[] country(string country){
+      	ParkService.ParksImplPort park = new ParkService.ParksImplPort();
+        //Method must return an array of available park names for a particular country passed to the web service
+        String[] parksname = park.byCountry(country);
+        return parksname;        
+    }
+}
